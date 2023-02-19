@@ -1,0 +1,9 @@
+-- Calculated deviation per size for each product.
+select sku,
+	product_name,
+	size,
+	price,
+	avg(price) over(partition by size) as "Avg. price for size",
+	price - avg(price) over(partition by size) as "Deviation"
+from inventory.products
+order by sku, size;
